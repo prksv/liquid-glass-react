@@ -507,7 +507,7 @@ function LiquidGlass({
   const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(-50% + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`;
   const baseStyle = {
     transform: transformStyle,
-    transition: "transform 0s ease-out, box-shadow 0s ease-out",
+    transition: style.transition || "transform 0.2s ease-out, box-shadow 0.2s ease-out",
     ...style
   };
   const positionStyles = {
