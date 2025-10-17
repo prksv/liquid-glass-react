@@ -112,3 +112,4 @@ function App() {
 | `mode` | `"standard" \| "polar" \| "prominent" \| "shader"` | `"standard"` | Refraction mode for different visual effects. `shader` is the most accurate but not the most stable. |
 | `globalMousePos` | `{ x: number; y: number }` | - | Global mouse position coordinates for manual control |
 | `mouseOffset` | `{ x: number; y: number }` | - | Mouse position offset for fine-tuning positioning |
+| `verticalPosition` | `"top" \| "bottom"` | `"top"` | Vertical positioning anchor point (top or bottom of container) |

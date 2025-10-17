@@ -283,6 +283,7 @@ interface LiquidGlassProps {
     overLight?: boolean
     mode?: "standard" | "polar" | "prominent" | "shader"
     onClick?: () => void
+    verticalPosition?: "top" | "bottom"
 }
 
 export default function LiquidGlass({
@@ -302,6 +303,7 @@ export default function LiquidGlass({
                                         style = {},
                                         mode = "standard",
                                         onClick,
+                                        verticalPosition = "top",
                                     }: LiquidGlassProps) {
     const glassRef = useRef<HTMLDivElement>(null)
     const [isHovered, setIsHovered] = useState(false)
@@ -467,7 +469,7 @@ export default function LiquidGlass({
         return () => observer.disconnect()
     }, [padding])
 
-    const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(-50% + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`
+    const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(${verticalPosition === "top" ? "-50%" : "50%"} + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`
 
     const baseStyle = {
         transform: transformStyle,
@@ -477,7 +479,9 @@ export default function LiquidGlass({
 
     const positionStyles = {
         position: baseStyle.position || "relative",
-        top: baseStyle.top || "50%",
+        ...(verticalPosition === "top" 
+            ? { top: baseStyle.top || "50%" } 
+            : { bottom: baseStyle.bottom || "50%" }),
         left: baseStyle.left || "50%",
     }
 
@@ -617,13 +621,11 @@ export default function LiquidGlass({
                     />
                     <div
                         style={{
-                            ...baseStyle,
+                            ...positionStyles,
                             height: glassSize.height,
                             width: glassSize.width + 1,
                             borderRadius: `${cornerRadius}px`,
-                            position: baseStyle.position,
-                            top: baseStyle.top,
-                            left: baseStyle.left,
+                            transform: baseStyle.transform,
                             pointerEvents: "none",
                             transition: baseStyle.transition,
                             opacity: isHovered ? 0.4 : isActive ? 0.8 : 0,

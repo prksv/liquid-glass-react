@@ -202,7 +202,7 @@ var GlassFilter = ({
       {
         in: "RED_DISPLACED",
         type: "matrix",
-        values: "1 0 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 0 1 0",
+        values: "1 0 0 0 0\n                 0 0 0 0 0\n                 0 0 0 0 0\n                 0 0 0 1 0",
         result: "RED_CHANNEL"
       }
     ),
@@ -222,7 +222,7 @@ var GlassFilter = ({
       {
         in: "GREEN_DISPLACED",
         type: "matrix",
-        values: "0 0 0 0 0\r\n                 0 1 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 0 1 0",
+        values: "0 0 0 0 0\n                 0 1 0 0 0\n                 0 0 0 0 0\n                 0 0 0 1 0",
         result: "GREEN_CHANNEL"
       }
     ),
@@ -242,7 +242,7 @@ var GlassFilter = ({
       {
         in: "BLUE_DISPLACED",
         type: "matrix",
-        values: "0 0 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 1 0 0\r\n                 0 0 0 1 0",
+        values: "0 0 0 0 0\n                 0 0 0 0 0\n                 0 0 1 0 0\n                 0 0 0 1 0",
         result: "BLUE_CHANNEL"
       }
     ),
@@ -386,7 +386,8 @@ function LiquidGlass({
   overLight = false,
   style = {},
   mode = "standard",
-  onClick
+  onClick,
+  verticalPosition = "top"
 }) {
   const glassRef = (0, import_react.useRef)(null);
   const [isHovered, setIsHovered] = (0, import_react.useState)(false);
@@ -504,7 +505,7 @@ function LiquidGlass({
     }
     return () => observer.disconnect();
   }, [padding]);
-  const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(-50% + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`;
+  const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(${verticalPosition === "top" ? "-50%" : "50%"} + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`;
   const baseStyle = {
     transform: transformStyle,
     transition: style.transition || "transform 0.2s ease-out, box-shadow 0.2s ease-out",
@@ -512,7 +513,7 @@ function LiquidGlass({
   };
   const positionStyles = {
     position: baseStyle.position || "relative",
-    top: baseStyle.top || "50%",
+    ...verticalPosition === "top" ? { top: baseStyle.top || "50%" } : { bottom: baseStyle.bottom || "50%" },
     left: baseStyle.left || "50%"
   };
   return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
@@ -663,13 +664,11 @@ function LiquidGlass({
         "div",
         {
           style: {
-            ...baseStyle,
+            ...positionStyles,
             height: glassSize.height,
             width: glassSize.width + 1,
             borderRadius: `${cornerRadius}px`,
-            position: baseStyle.position,
-            top: baseStyle.top,
-            left: baseStyle.left,
+            transform: baseStyle.transform,
             pointerEvents: "none",
             transition: baseStyle.transition,
             opacity: isHovered ? 0.4 : isActive ? 0.8 : 0,
