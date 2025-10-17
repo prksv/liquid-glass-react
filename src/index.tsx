@@ -471,7 +471,6 @@ export default function LiquidGlass({
 
     const baseStyle = {
         transform: transformStyle,
-        transition: 'all ease-out 0.2s, width 0.2s ease-out, height 0.2s ease-out',
         ...style,
     }
 
