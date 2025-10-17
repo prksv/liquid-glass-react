@@ -226,7 +226,7 @@ const GlassContainer = forwardRef<
                         gap: "24px",
                         padding,
                         overflow: "hidden",
-                        transition: baseStyle.transition,
+                        transition: 'none', //change in future
                         boxShadow: overLight ? "0px 16px 70px rgba(0, 0, 0, 0.75)" : "0px 12px 40px rgba(0, 0, 0, 0.25)",
                     }}
                     onMouseEnter={onMouseEnter}
