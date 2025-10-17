@@ -428,18 +428,14 @@ export default function LiquidGlass({
   }, [globalMousePos, elasticity, calculateFadeInFactor])
 
   // Update glass size whenever component mounts or window resizes
-  useEffect(() => {
-    const updateGlassSize = () => {
-      if (glassRef.current) {
-        const rect = glassRef.current.getBoundingClientRect()
-        setGlassSize({ width: rect.width, height: rect.height })
-      }
-    }
-
-    updateGlassSize()
-    window.addEventListener("resize", updateGlassSize)
-    return () => window.removeEventListener("resize", updateGlassSize)
-  }, [])
+    useEffect(() => {
+        updateGlassSize()
+        const observer = new ResizeObserver(updateGlassSize)
+        if (glassRef.current) {
+            observer.observe(glassRef.current)
+        }
+        return () => observer.disconnect()
+    }, [padding])
 
   const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(-50% + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`
 
