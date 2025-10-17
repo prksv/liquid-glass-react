@@ -470,9 +470,9 @@ export default function LiquidGlass({
     const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(-50% + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`
 
     const baseStyle = {
-        ...style,
         transform: transformStyle,
-        transition: style.transition || 'all ease-out 0.2s, width 0.2s ease-out, height 0.2s ease-out',
+        transition: 'all ease-out 0.2s, width 0.2s ease-out, height 0.2s ease-out',
+        ...style,
     }
 
     const positionStyles = {
