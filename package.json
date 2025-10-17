@@ -8,6 +8,7 @@
   "files": ["dist"],
   "workspaces": ["liquid-glass"],
   "scripts": {
+    "prepare": "npm run build",
     "build": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
     "build:esm": "esbuild src/index.tsx --bundle --format=esm --outfile=dist/index.esm.js --external:react --external:react-dom",
     "build:cjs": "esbuild src/index.tsx --bundle --format=cjs --outfile=dist/index.js --external:react --external:react-dom",
