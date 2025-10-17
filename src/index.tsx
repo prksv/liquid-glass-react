@@ -226,7 +226,7 @@ const GlassContainer = forwardRef<
                         gap: "24px",
                         padding,
                         overflow: "hidden",
-                        transition: "all 0.2s ease-in-out",
+                        transition: baseStyle.transition,
                         boxShadow: overLight ? "0px 16px 70px rgba(0, 0, 0, 0.75)" : "0px 12px 40px rgba(0, 0, 0, 0.25)",
                     }}
                     onMouseEnter={onMouseEnter}
@@ -471,6 +471,7 @@ export default function LiquidGlass({
 
     const baseStyle = {
         transform: transformStyle,
+        transition: "transform 0.2s ease-out, box-shadow 0.2s ease-out",
         ...style,
     }
 
@@ -594,7 +595,7 @@ export default function LiquidGlass({
                             borderRadius: `${cornerRadius}px`,
                             transform: baseStyle.transform,
                             pointerEvents: "none",
-                            transition: "all 0.2s ease-out",
+                            transition: baseStyle.transition,
                             opacity: isHovered || isActive ? 0.5 : 0,
                             backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%)",
                             mixBlendMode: "overlay",
@@ -608,7 +609,7 @@ export default function LiquidGlass({
                             borderRadius: `${cornerRadius}px`,
                             transform: baseStyle.transform,
                             pointerEvents: "none",
-                            transition: "all 0.2s ease-out",
+                            transition: baseStyle.transition,
                             opacity: isActive ? 0.5 : 0,
                             backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 80%)",
                             mixBlendMode: "overlay",
@@ -624,7 +625,7 @@ export default function LiquidGlass({
                             top: baseStyle.top,
                             left: baseStyle.left,
                             pointerEvents: "none",
-                            transition: "all 0.2s ease-out",
+                            transition: baseStyle.transition,
                             opacity: isHovered ? 0.4 : isActive ? 0.8 : 0,
                             backgroundImage: "radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)",
                             mixBlendMode: "overlay",
