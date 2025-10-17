@@ -427,15 +427,26 @@ export default function LiquidGlass({
     }
   }, [globalMousePos, elasticity, calculateFadeInFactor])
 
+  // Function to update glass size based on current element dimensions
+  const updateGlassSize = useCallback(() => {
+    if (glassRef.current) {
+      const rect = glassRef.current.getBoundingClientRect()
+      setGlassSize({
+        width: rect.width || 270,
+        height: rect.height || 69,
+      })
+    }
+  }, [])
+
   // Update glass size whenever component mounts or window resizes
-    useEffect(() => {
-        updateGlassSize()
-        const observer = new ResizeObserver(updateGlassSize)
-        if (glassRef.current) {
-            observer.observe(glassRef.current)
-        }
-        return () => observer.disconnect()
-    }, [padding])
+  useEffect(() => {
+    updateGlassSize()
+    const observer = new ResizeObserver(updateGlassSize)
+    if (glassRef.current) {
+      observer.observe(glassRef.current)
+    }
+    return () => observer.disconnect()
+  }, [padding, updateGlassSize])
 
   const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(-50% + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`
 
