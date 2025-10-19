@@ -493,11 +493,11 @@ function LiquidGlass({
     ...style
   };
   const positionStyles = {
-    position: baseStyle.position || "relative",
+    position: "absolute",
     ...verticalPosition === "top" ? { top: baseStyle.top || "50%" } : { bottom: baseStyle.bottom || "50%" },
     left: baseStyle.left || "50%"
   };
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
+  return /* @__PURE__ */ jsxs("div", { style: { position: "relative", display: "inline-block" }, children: [
     /* @__PURE__ */ jsx(
       "div",
       {

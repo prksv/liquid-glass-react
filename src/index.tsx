@@ -483,7 +483,7 @@ export default function LiquidGlass({
     }
 
     const positionStyles = {
-        position: baseStyle.position || "relative",
+        position: "absolute" as const,
         ...(verticalPosition === "top" 
             ? { top: baseStyle.top || "50%" } 
             : { bottom: baseStyle.bottom || "50%" }),
@@ -491,7 +491,7 @@ export default function LiquidGlass({
     }
 
     return (
-        <>
+        <div style={{ position: "relative", display: "inline-block" }}>
             {/* Over light effect */}
             <div
                 className={`bg-black transition-all duration-150 ease-in-out pointer-events-none ${overLight ? "opacity-20" : "opacity-0"}`}
@@ -640,6 +640,6 @@ export default function LiquidGlass({
                     />
                 </>
             )}
-        </>
+        </div>
     )
 }
