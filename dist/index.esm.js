@@ -178,7 +178,7 @@ var GlassFilter = ({
       {
         in: "RED_DISPLACED",
         type: "matrix",
-        values: "1 0 0 0 0\n                 0 0 0 0 0\n                 0 0 0 0 0\n                 0 0 0 1 0",
+        values: "1 0 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 0 1 0",
         result: "RED_CHANNEL"
       }
     ),
@@ -198,7 +198,7 @@ var GlassFilter = ({
       {
         in: "GREEN_DISPLACED",
         type: "matrix",
-        values: "0 0 0 0 0\n                 0 1 0 0 0\n                 0 0 0 0 0\n                 0 0 0 1 0",
+        values: "0 0 0 0 0\r\n                 0 1 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 0 1 0",
         result: "GREEN_CHANNEL"
       }
     ),
@@ -218,7 +218,7 @@ var GlassFilter = ({
       {
         in: "BLUE_DISPLACED",
         type: "matrix",
-        values: "0 0 0 0 0\n                 0 0 0 0 0\n                 0 0 1 0 0\n                 0 0 0 1 0",
+        values: "0 0 0 0 0\r\n                 0 0 0 0 0\r\n                 0 0 1 0 0\r\n                 0 0 0 1 0",
         result: "BLUE_CHANNEL"
       }
     ),
@@ -307,7 +307,9 @@ var GlassContainer = forwardRef(
                 transition: "none",
                 //change in future
                 boxShadow: overLight ? "0px 16px 70px rgba(0, 0, 0, 0.75)" : "0px 12px 40px rgba(0, 0, 0, 0.25)",
-                width: glassSize.width
+                width: glassSize.width,
+                height: glassSize.height,
+                boxSizing: "border-box"
               },
               onMouseEnter,
               onMouseLeave,
@@ -322,8 +324,8 @@ var GlassContainer = forwardRef(
                       ...backdropStyle,
                       position: "absolute",
                       inset: "0",
-                      width: glassSize.width,
-                      height: glassSize.height
+                      width: "100%",
+                      height: "100%"
                     }
                   }
                 ),
@@ -336,8 +338,8 @@ var GlassContainer = forwardRef(
                       zIndex: 1,
                       font: "500 20px/1 system-ui",
                       textShadow: overLight ? "0px 2px 12px rgba(0, 0, 0, 0)" : "0px 2px 12px rgba(0, 0, 0, 0.4)",
-                      width: glassSize.width,
-                      height: glassSize.height
+                      width: "100%",
+                      height: "100%"
                     },
                     children
                   }
@@ -485,7 +487,7 @@ function LiquidGlass({
       observer.observe(glassRef.current);
     }
     return () => observer.disconnect();
-  }, [padding, glassSize.width, glassSize.height]);
+  }, [padding]);
   const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(${verticalPosition === "top" ? "-50%" : "50%"} + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`;
   const baseStyle = {
     transform: transformStyle,
