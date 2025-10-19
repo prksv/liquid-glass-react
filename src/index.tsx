@@ -467,7 +467,7 @@ export default function LiquidGlass({
             observer.observe(glassRef.current)
         }
         return () => observer.disconnect()
-    }, [padding])
+    }, [padding, glassSize.width, glassSize.height])
 
     const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(${verticalPosition === "top" ? "-50%" : "50%"} + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`
 
