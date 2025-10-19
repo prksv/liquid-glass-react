@@ -345,7 +345,9 @@ var GlassContainer = (0, import_react.forwardRef)(
                     style: {
                       ...backdropStyle,
                       position: "absolute",
-                      inset: "0"
+                      inset: "0",
+                      width: glassSize.width,
+                      height: glassSize.height
                     }
                   }
                 ),
@@ -357,7 +359,9 @@ var GlassContainer = (0, import_react.forwardRef)(
                       position: "relative",
                       zIndex: 1,
                       font: "500 20px/1 system-ui",
-                      textShadow: overLight ? "0px 2px 12px rgba(0, 0, 0, 0)" : "0px 2px 12px rgba(0, 0, 0, 0.4)"
+                      textShadow: overLight ? "0px 2px 12px rgba(0, 0, 0, 0)" : "0px 2px 12px rgba(0, 0, 0, 0.4)",
+                      width: glassSize.width,
+                      height: glassSize.height
                     },
                     children
                   }
