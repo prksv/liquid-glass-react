@@ -306,7 +306,8 @@ var GlassContainer = forwardRef(
                 overflow: "hidden",
                 transition: "none",
                 //change in future
-                boxShadow: overLight ? "0px 16px 70px rgba(0, 0, 0, 0.75)" : "0px 12px 40px rgba(0, 0, 0, 0.25)"
+                boxShadow: overLight ? "0px 16px 70px rgba(0, 0, 0, 0.75)" : "0px 12px 40px rgba(0, 0, 0, 0.25)",
+                width: glassSize.width
               },
               onMouseEnter,
               onMouseLeave,
@@ -480,7 +481,7 @@ function LiquidGlass({
       observer.observe(glassRef.current);
     }
     return () => observer.disconnect();
-  }, [padding]);
+  }, [padding, glassSize.width, glassSize.height]);
   const transformStyle = `translate(calc(-50% + ${calculateElasticTranslation().x}px), calc(${verticalPosition === "top" ? "-50%" : "50%"} + ${calculateElasticTranslation().y}px)) ${isActive && Boolean(onClick) ? "scale(0.96)" : calculateDirectionalScale()}`;
   const baseStyle = {
     transform: transformStyle,
